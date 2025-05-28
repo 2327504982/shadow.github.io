@@ -1,0 +1,1063 @@
+   <html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7D00',
+                        neutral: '#F5F7FA',
+                        dark: '#1D2129',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .nav-link {
+                @apply relative px-3 py-2 text-gray-700 hover:text-primary transition-colors duration-200;
+            }
+            .nav-link::after {
+                @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+            }
+            .nav-link:hover::after {
+                @apply w-full;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+            }
+            .btn-secondary {
+                @apply bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 text-dark">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-primary text-2xl font-bold mr-2">
+                        <i class="fa fa-user-circle-o"></i>
+                    </div>
+                    <span class="text-xl font-bold text-primary">个人网站</span>
+                </div>
+                
+                <!-- 桌面导航 -->
+                <nav class="hidden md:flex space-x-2">
+                    <a href="#home" class="nav-link">首页</a>
+                    <a href="#about" class="nav-link">关于我</a>
+                    <a href="#articles" class="nav-link">文章</a>
+                    <a href="#gallery" class="nav-link">画廊</a>
+                    <a href="#message" class="nav-link">留言</a>
+                    <a href="#links" class="nav-link">友情链接</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+                <a href="#home" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">首页</a>
+                <a href="#about" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">关于我</a>
+                <a href="#articles" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">文章</a>
+                <a href="#gallery" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">画廊</a>
+                <a href="#message" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">留言</a>
+                <a href="#links" class="block py-2 px-4 hover:bg-gray-100 rounded-lg transition-colors">友情链接</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-br from-primary/10 to-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-4">
+                        欢迎来到我的<br><span class="text-primary">个人空间</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mb-8 max-w-xl">
+                        我是李云烽，物联网工程专业的一名学生。这里展示我的兴趣爱好、分享我的思考与感悟，以及记录生活中的美好瞬间。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#about" class="btn-primary">
+                            了解更多 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                        <a href="#message" class="btn-secondary">
+                            留言交流 <i class="fa fa-comment ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="img/renleijianshi.jpeg" alt="个人照片" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">关于我</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-neutral rounded-xl p-6 shadow-sm card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">个人简介</h3>
+                    <p class="text-gray-600">
+                        姓名：李云烽<br>
+                        学号：2023213077<br>
+                        专业：物联网工程<br>
+                        电话：18323413213<br>
+                        邮箱：2327504912@qq.com<br>
+                        地区：重庆市南岸区<br><br>
+                        我是一名对技术充满热情的学生，目前专注于物联网工程领域的学习和研究。我喜欢探索新技术，分享我的学习经验和见解。
+                    </p>
+                </div>
+                
+                <div class="bg-neutral rounded-xl p-6 shadow-sm card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">兴趣爱好</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fa fa-check-circle text-primary mr-2"></i>玩游戏</li>
+                        <li><i class="fa fa-check-circle text-primary mr-2"></i>看电影</li>
+                        <li><i class="fa fa-check-circle text-primary mr-2"></i>阅读书籍</li>
+                        <li><i class="fa fa-check-circle text-primary mr-2"></i>探索新技术</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-neutral rounded-xl p-6 shadow-sm card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">技能与专长</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">物联网开发</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">编程基础</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Web开发</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文章部分 -->
+    <section id="articles" class="py-16 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">我的文章</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    分享我的思考、学习和经验，希望能对你有所启发
+                </p>
+            </div>
+
+            <!-- 搜索和筛选 -->
+            <div class="mb-8">
+                <div class="flex flex-col md:flex-row gap-4 justify-between">
+                    <div class="relative flex-1">
+                        <input type="text" id="article-search" placeholder="搜索文章标题..."
+                            class="w-full py-2 px-4 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                        <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="flex gap-4">
+                        <select id="article-filter"
+                            class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                            <option value="all">全部文章</option>
+                            <option value="tech">技术</option>
+                            <option value="life">生活</option>
+                            <option value="study">学习</option>
+                            <option value="game">游戏</option>
+                        </select>
+                        <select id="article-sort"
+                            class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                            <option value="newest">最新发布</option>
+                            <option value="oldest">最早发布</option>
+                            <option value="popular">最受欢迎</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章列表 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-container">
+                <!-- 文章卡片 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm card-hover" data-category="tech"
+                    data-date="2025-05-20" data-id="1">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://picsum.photos/seed/iot/800/600" alt="物联网技术"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-primary text-white text-xs font-medium px-2 py-1 rounded">技术</div>
+                        <div class="absolute top-3 right-3 bg-white/80 text-dark text-xs font-medium px-2 py-1 rounded backdrop-blur-sm">
+                            <i class="fa fa-calendar-o mr-1"></i> 2025-05-20
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">物联网技术在智能家居中的应用</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">
+                            随着物联网技术的发展，智能家居已经成为未来家居的发展方向。本文探讨了物联网技术在智能家居中的应用场景和实现方式，分析了当前面临的挑战和未来的发展趋势。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://picsum.photos/seed/developer/100/100" alt="作者头像"
+                                    class="w-8 h-8 rounded-full object-cover mr-2">
+                                <span class="text-sm text-gray-500">李云烽</span>
+                            </div>
+                            <a href="#" class="read-more-btn text-primary hover:text-primary/80 font-medium text-sm transition-colors" data-id="1">
+                                阅读更多 <i class="fa fa-long-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 文章卡片 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm card-hover" data-category="game"
+                    data-date="2025-05-15" data-id="2">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://picsum.photos/seed/game-review/800/600" alt="游戏评测"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-secondary text-white text-xs font-medium px-2 py-1 rounded">游戏</div>
+                        <div class="absolute top-3 right-3 bg-white/80 text-dark text-xs font-medium px-2 py-1 rounded backdrop-blur-sm">
+                            <i class="fa fa-calendar-o mr-1"></i> 2025-05-15
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">《塞尔达传说：王国之泪》游戏评测</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">
+                            《塞尔达传说：王国之泪》是一款备受期待的开放世界冒险游戏。本文对这款游戏的画面、剧情、玩法等方面进行了全面评测，并分享了一些游戏中的技巧和心得。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://picsum.photos/seed/developer/100/100" alt="作者头像"
+                                    class="w-8 h-8 rounded-full object-cover mr-2">
+                                <span class="text-sm text-gray-500">李云烽</span>
+                            </div>
+                            <a href="#" class="read-more-btn text-primary hover:text-primary/80 font-medium text-sm transition-colors" data-id="2">
+                                阅读更多 <i class="fa fa-long-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 文章卡片 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm card-hover" data-category="study"
+                    data-date="2025-05-10" data-id="3">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://picsum.photos/seed/study/800/600" alt="学习经验"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded">学习</div>
+                        <div class="absolute top-3 right-3 bg-white/80 text-dark text-xs font-medium px-2 py-1 rounded backdrop-blur-sm">
+                            <i class="fa fa-calendar-o mr-1"></i> 2025-05-10
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">大学学习经验分享：如何高效学习物联网工程</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">
+                            物联网工程是一个涉及多学科的综合性专业，学习内容广泛且深入。在这篇文章中，我将分享我的学习经验和方法，希望能帮助其他同学更好地学习物联网工程专业。
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://picsum.photos/seed/developer/100/100" alt="作者头像"
+                                    class="w-8 h-8 rounded-full object-cover mr-2">
+                                <span class="text-sm text-gray-500">李云烽</span>
+                            </div>
+                            <a href="#" class="read-more-btn text-primary hover:text-primary/80 font-medium text-sm transition-colors" data-id="3">
+                                阅读更多 <i class="fa fa-long-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 加载更多按钮 -->
+            <div class="text-center mt-12">
+                <button id="load-more-articles" class="btn-primary">
+                    加载更多文章 <i class="fa fa-refresh ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文章详情模态框 -->
+    <div id="article-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 id="modal-title" class="text-2xl font-bold text-dark"></h2>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="flex items-center text-sm text-gray-500 mb-6">
+                    <img id="modal-author-avatar" src="" alt="作者头像" class="w-8 h-8 rounded-full mr-2">
+                    <span id="modal-author">作者</span>
+                    <span class="mx-2">•</span>
+                    <span id="modal-date"></span>
+                    <span class="mx-2">•</span>
+                    <span id="modal-category" class="px-2 py-1 rounded text-xs"></span>
+                </div>
+                <div id="modal-content" class="article-content"></div>
+                <div class="mt-8 flex justify-between items-center">
+                    <button id="close-modal-btn" class="btn-primary">
+                        返回文章列表 <i class="fa fa-arrow-left ml-1"></i>
+                    </button>
+                    <div class="flex space-x-3">
+                        <button class="text-gray-500 hover:text-primary transition-colors">
+                            <i class="fa fa-thumbs-up mr-1"></i> 点赞
+                        </button>
+                        <button class="text-gray-500 hover:text-primary transition-colors">
+                            <i class="fa fa-bookmark-o mr-1"></i> 收藏
+                        </button>
+                        <button class="text-gray-500 hover:text-primary transition-colors">
+                            <i class="fa fa-share-alt mr-1"></i> 分享
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 画廊部分 -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">我的画廊</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    记录生活中的美好瞬间，分享旅行中的风景和感受
+                </p>
+            </div>
+            
+            <!-- 搜索和筛选 -->
+            <div class="mb-8">
+                <div class="flex flex-col md:flex-row gap-4 justify-between">
+                    <div class="relative flex-1">
+                        <input type="text" id="gallery-search" placeholder="搜索图片描述..." class="w-full py-2 px-4 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                        <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="flex gap-4">
+                        <select id="gallery-filter" class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                            <option value="all">全部图片</option>
+                            <option value="game">游戏</option>
+                            <option value="movie">电影</option>
+                            <option value="book">书籍</option>
+                            <option value="life">生活</option>
+                        </select>
+                        <select id="gallery-sort" class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                            <option value="newest">最新上传</option>
+                            <option value="oldest">最早上传</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图片网格 -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-container">
+                <!-- 图片项 1 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/saierda.jpg" alt="塞尔达传说" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《塞尔达传说》游戏画面</h3>
+                        <p class="text-white/80 text-sm">2025年3月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 2 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/xingjichuanyue.jpeg" alt="星际穿越" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《星际穿越》电影海报</h3>
+                        <p class="text-white/80 text-sm">2025年2月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 3 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/santi.jpeg" alt="三体" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《三体》书籍封面</h3>
+                        <p class="text-white/80 text-sm">2025年1月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 4 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/chongyou.jpeg" alt="校园生活" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">校园生活</h3>
+                        <p class="text-white/80 text-sm">2024年12月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 5 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/saibopengke.jpg" alt="赛博朋克" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《赛博朋克2077》游戏画面</h3>
+                        <p class="text-white/80 text-sm">2024年11月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 6 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/盗梦空间.jpeg" alt="盗梦空间" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《盗梦空间》电影场景</h3>
+                        <p class="text-white/80 text-sm">2024年10月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 7 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/renleijianshi.jpeg" alt="人类简史" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">《人类简史》书籍内页</h3>
+                        <p class="text-white/80 text-sm">2024年9月</p>
+                    </div>
+                </div>
+                
+                <!-- 图片项 8 -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer card-hover">
+                    <img src="img/tushuguan.jpg" alt="阅读时光" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white font-medium">周末阅读时光</h3>
+                        <p class="text-white/80 text-sm">2024年8月</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 加载更多按钮 -->
+            <div class="text-center mt-12">
+                <button id="load-more-gallery" class="btn-primary">
+                    加载更多图片 <i class="fa fa-refresh ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 广告区域 -->
+    <section class="py-12 bg-gradient-to-r from-primary to-primary/80 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0 md:max-w-xl">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-4">探索物联网世界</h2>
+                    <p class="text-white/90 mb-6">
+                        无论你是初学者还是有经验的开发者，这里都有适合你的课程和教程。从基础到高级，一步一步提升你的物联网技能。
+                    </p>
+                    <a href="#" class="bg-white text-primary hover:bg-gray-100 font-medium py-2 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                        了解更多 <i class="fa fa-external-link ml-1"></i>
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <img src="https://picsum.photos/seed/iot-banner/600/400" alt="广告图片" class="w-full max-w-md rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 留言板 -->
+    <section id="message" class="py-16 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">留言板</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    留下你的想法、建议或问题，我会尽快回复你
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 留言表单 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-xl font-semibold mb-4">发表留言</h3>
+                        <form id="message-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="请输入你的姓名" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">邮箱</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="请输入你的邮箱" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">主题</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="留言主题">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">留言内容</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="请输入留言内容" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">
+                                提交留言 <i class="fa fa-paper-plane ml-1"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 留言列表 -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-xl font-semibold mb-4">最新留言</h3>
+
+                        <div id="messages-container" class="space-y-6">
+                            <div class="text-center py-8 text-gray-500">
+                                <i class="fa fa-comment-o text-4xl mb-3"></i>
+                                <p>还没有留言，快来留下你的第一条留言吧！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 友情链接 -->
+    <section id="links" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">友情链接</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    这里是一些我推荐的优质网站，涵盖技术、设计、生活等多个领域
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- 链接项 1 -->
+                <a href="https://www.csdn.net/" class="bg-neutral rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center card-hover group">
+                    <div class="text-primary text-4xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 group-hover:text-primary transition-colors">技术社区</h3>
+                    <p class="text-gray-600 text-sm">提供最新专业的IT资源</p>
+                </a>
+                
+                <!-- 链接项 2 -->
+                <a href="https://store.steampowered.com/" class="bg-neutral rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center card-hover group">
+                    <div class="text-primary text-4xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 group-hover:text-primary transition-colors">游戏网站</h3>
+                    <p class="text-gray-600 text-sm">好玩的游戏大全</p>
+                </a>
+                
+                <!-- 链接项 3 -->
+                <a href="https://www.mvcat.com/#https://www.mvcat.com/movie/erotic/" class="bg-neutral rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center card-hover group">
+                    <div class="text-primary text-4xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-film"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 group-hover:text-primary transition-colors">电影推荐平台</h3>
+                    <p class="text-gray-600 text-sm">提供电影点评和资源</p>
+                </a>
+                
+                <!-- 链接项 4 -->
+                <a href="https://zh.101-e.ru/fulltext" class="bg-neutral rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center card-hover group">
+                    <div class="text-primary text-4xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 group-hover:text-primary transition-colors">读书社区</h3>
+                    <p class="text-gray-600 text-sm">优质书籍和阅读心得资源网站</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计信息 -->
+    <section class="py-12 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2" id="stats-articles">3</div>
+                    <p class="text-white/80">文章总数</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2" id="stats-gallery">8</div>
+                    <p class="text-white/80">图片总数</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2" id="stats-comments">0</div>
+                    <p class="text-white/80">留言总数</p>
+                </div>
+                <div class="p-4">
+                    <!-- 这里可根据需求添加更多统计信息 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-8 bg-dark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 李云烽. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 文章搜索和筛选功能（这里仅为示例，需完善逻辑）
+        const articleSearch = document.getElementById('article-search');
+        const articleFilter = document.getElementById('article-filter');
+        const articleSort = document.getElementById('article-sort');
+        const articlesContainer = document.getElementById('articles-container');
+
+        articleSearch.addEventListener('input', () => {
+            // 实现搜索逻辑
+        });
+
+        articleFilter.addEventListener('change', () => {
+            // 实现筛选逻辑
+        });
+
+        articleSort.addEventListener('change', () => {
+            // 实现排序逻辑
+        });
+
+        // 画廊搜索和筛选功能（这里仅为示例，需完善逻辑）
+        const gallerySearch = document.getElementById('gallery-search');
+        const galleryFilter = document.getElementById('gallery-filter');
+        const gallerySort = document.getElementById('gallery-sort');
+        const galleryContainer = document.getElementById('gallery-container');
+
+        gallerySearch.addEventListener('input', () => {
+            // 实现搜索逻辑
+        });
+
+        galleryFilter.addEventListener('change', () => {
+            // 实现筛选逻辑
+        });
+
+        gallerySort.addEventListener('change', () => {
+            // 实现排序逻辑
+        });
+
+        // 留言表单提交功能（这里仅为示例，需完善逻辑）
+       
+        // 文章详情模态框功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有阅读更多按钮
+            const readMoreButtons = document.querySelectorAll('.read-more-btn');
+            const articleModal = document.getElementById('article-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const closeModalBtn2 = document.getElementById('close-modal-btn');
+            const modalTitle = document.getElementById('modal-title');
+            const modalAuthor = document.getElementById('modal-author');
+            const modalAuthorAvatar = document.getElementById('modal-author-avatar');
+            const modalDate = document.getElementById('modal-date');
+            const modalCategory = document.getElementById('modal-category');
+            const modalContent = document.getElementById('modal-content');
+
+            // 文章数据
+            const articles = [
+                {
+                    id: 1,
+                    title: "物联网技术在智能家居中的应用",
+                    category: "技术",
+                    categoryColor: "bg-primary",
+                    date: "2025-05-20",
+                    author: "李云烽",
+                    authorAvatar: "https://picsum.photos/seed/developer/100/100",
+                    content: `
+                        <p>随着物联网技术的快速发展，智能家居已经从概念逐渐走入人们的日常生活。物联网技术通过将各种家居设备连接到互联网，实现了设备之间的互联互通和智能化控制，为人们带来了更加便捷、舒适、安全的居住体验。</p>
+                        
+                        <h3>智能家居的核心技术</h3>
+                        <p>智能家居的实现依赖于多种物联网技术的协同作用，主要包括：</p>
+                        <ul>
+                            <li><strong>传感器技术</strong>：用于感知环境参数和设备状态，如温度、湿度、光照、人体存在等。</li>
+                            <li><strong>通信技术</strong>：包括Wi-Fi、蓝牙、ZigBee、Z-Wave等，用于实现设备之间的数据传输和通信。</li>
+                            <li><strong>云计算技术</strong>：提供强大的计算和存储能力，支持智能家居系统的数据分析和智能决策。</li>
+                            <li><strong>人工智能技术</strong>：通过机器学习和深度学习算法，实现智能家居的自动化控制和个性化服务。</li>
+                        </ul>
+                        
+                        <h3>智能家居的应用场景</h3>
+                        <p>物联网技术在智能家居中的应用场景非常广泛，主要包括以下几个方面：</p>
+                        
+                        <h4>智能照明</h4>
+                        <p>智能照明系统可以根据环境光线强度、人体活动情况等自动调节灯光亮度和颜色，实现节能环保和人性化照明。例如，当检测到房间内没有人时，灯光会自动关闭；当有人进入房间时，灯光会自动亮起并调节到合适的亮度。</p>
+                        
+                        <h4>智能安防</h4>
+                        <p>智能安防系统通过安装摄像头、门磁、窗磁、烟雾报警器等设备，实现对家庭安全的实时监控和预警。例如，当检测到异常人员进入家中时，系统会自动发送警报信息到用户的手机，并启动录像功能。</p>
+                        
+                        <h4>智能家电控制</h4>
+                        <p>用户可以通过手机APP或语音控制等方式，远程控制家中的各种家电设备，如空调、冰箱、洗衣机、电视等。例如，在下班回家的路上，用户可以提前打开空调，调节到合适的温度，到家后就能享受舒适的环境。</p>
+                        
+                        <h3>智能家居的发展趋势</h3>
+                        <p>未来，智能家居将朝着更加智能化、人性化、集成化的方向发展。具体表现为：</p>
+                        <ul>
+                            <li><strong>更加智能化</strong>：借助人工智能技术，智能家居系统将能够更好地理解用户需求，提供更加个性化的服务。</li>
+                            <li><strong>更加人性化</strong>：智能家居设备的设计将更加注重用户体验，操作更加简单便捷，界面更加友好。</li>
+                            <li><strong>更加集成化</strong>：不同品牌、不同类型的智能家居设备将实现更加紧密的集成和协同工作，形成一个完整的智能家居生态系统。</li>
+                        </ul>
+                        
+                        <h3>挑战与展望</h3>
+                        <p>尽管智能家居市场前景广阔，但目前仍面临一些挑战，如安全隐私问题、标准不统一、用户认知度低等。解决这些问题需要政府、企业和社会各方的共同努力。</p>
+                        <p>总的来说，物联网技术在智能家居中的应用前景非常广阔，将为人们的生活带来更多的便利和舒适。随着技术的不断进步和市场的不断成熟，智能家居有望成为未来家居的主流发展方向。</p>
+                    `
+                },
+                {
+                    id: 2,
+                    title: "《塞尔达传说：王国之泪》游戏评测",
+                    category: "游戏",
+                    categoryColor: "bg-secondary",
+                    date: "2025-05-15",
+                    author: "李云烽",
+                    authorAvatar: "https://picsum.photos/seed/developer/100/100",
+                    content: `
+                        <p>《塞尔达传说：王国之泪》是任天堂发行的一款开放世界动作冒险游戏，作为《塞尔达传说：旷野之息》的续作，备受玩家期待。本文将从游戏画面、剧情、玩法等方面进行全面评测，并分享一些游戏中的技巧和心得。</p>
+                        
+                        <h3>游戏画面与音效</h3>
+                        <p>《王国之泪》延续了前作的卡通渲染风格，但在细节和光影效果上有了显著提升。游戏中的场景更加细腻，植被、水流、岩石等元素都呈现出极高的真实感。动态天气系统和昼夜循环依然存在，不同的天气和时间会给游戏带来截然不同的视觉体验。</p>
+                        <p>音效方面，游戏的背景音乐依然出色，能够很好地烘托出游戏的氛围。角色的语音和环境音效也非常到位，增强了游戏的沉浸感。</p>
+                        
+                        <h3>剧情与世界观</h3>
+                        <p>游戏的剧情承接前作，讲述了林克和塞尔达在探索海拉鲁王国的过程中，发现了一个隐藏已久的秘密——地下世界的存在。玩家将在地上和地下两个世界中展开冒险，揭开王国之泪的神秘面纱。</p>
+                        <p>游戏的世界观更加丰富和深入，除了主线任务外，还有大量的支线任务和隐藏内容等待玩家去发现。每个区域都有其独特的文化和历史背景，让玩家在冒险的同时能够深入了解海拉鲁王国的故事。</p>
+                        
+                        <h3>玩法与创新</h3>
+                        <p>《王国之泪》在玩法上进行了大量的创新，引入了许多新的机制和道具。其中最引人注目的是"融合"和"余料建造"系统。</p>
+                        <p><strong>融合系统</strong>允许玩家将不同的物品组合在一起，创造出具有特殊功能的武器和工具。例如，将炸弹与箭融合可以制作出爆炸箭，将火焰与剑融合可以制作出火焰剑。</p>
+                        <p><strong>余料建造系统</strong>则允许玩家利用各种材料建造出各种各样的机械装置，如飞行器、战车、船只等。这个系统给予了玩家极大的自由度和创造力，让玩家可以根据自己的想法和需求来设计和建造各种工具。</p>
+                        
+                        <h3>游戏体验与难度</h3>
+                        <p>游戏的整体体验非常流畅，操作简单易懂，但又不失深度。战斗系统依然保持了前作的高水准，玩家需要根据敌人的特点和弱点来选择合适的武器和战术。解谜元素也依然是游戏的一大亮点，各种巧妙的谜题设计让人回味无穷。</p>
+                        <p>游戏的难度适中，既不会过于简单让玩家感到无聊，也不会过于困难让玩家感到挫败。新手玩家可以通过探索和完成任务来逐渐提升自己的技能和装备，而有经验的玩家则可以挑战更高难度的内容。</p>
+                        
+                        <h3>总结与评分</h3>
+                        <p>《塞尔达传说：王国之泪》是一款非常出色的游戏，它在保持前作优点的基础上，进行了大量的创新和改进。丰富的剧情、开放的世界、创新的玩法和出色的画面音效，都让这款游戏成为了任天堂Switch平台上的一款佳作。</p>
+                        <p>综合评分：9.5/10</p>
+                        <p>推荐指数：强烈推荐</p>
+                        
+                        <h3>游戏技巧与心得</h3>
+                        <p>最后，分享一些游戏中的技巧和心得，希望对各位玩家有所帮助：</p>
+                        <ul>
+                            <li>多探索：游戏中隐藏着大量的宝箱、任务和秘密，多探索可以让你获得更多的装备和经验。</li>
+                            <li>善用融合和余料建造系统：这两个系统是游戏的核心玩法，善用它们可以让你在游戏中更加轻松。</li>
+                            <li>注意天气和时间：不同的天气和时间会影响游戏中的各种元素，如敌人的行为、植物的生长等。</li>
+                            <li>合理分配技能点：游戏中的技能点可以提升你的各种能力，合理分配技能点可以让你在游戏中更加得心应手。</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 3,
+                    title: "大学学习经验分享：如何高效学习物联网工程",
+                    category: "学习",
+                    categoryColor: "bg-green-500",
+                    date: "2025-05-10",
+                    author: "李云烽",
+                    authorAvatar: "https://picsum.photos/seed/developer/100/100",
+                    content: `
+                        <p>物联网工程是一个涉及多学科的综合性专业，融合了计算机科学、通信工程、电子工程等多个领域的知识。作为一名物联网工程专业的学生，我在学习过程中积累了一些经验和方法，希望能够与大家分享，帮助大家更加高效地学习物联网工程专业。</p>
+                        
+                        <h3>一、明确学习目标</h3>
+                        <p>物联网工程专业的学习内容非常广泛，包括硬件设计、软件开发、网络通信、传感器技术、云计算等多个方面。在学习之前，首先要明确自己的学习目标，确定自己感兴趣的方向，然后有针对性地进行学习。</p>
+                        <p>例如，如果你对硬件设计感兴趣，可以重点学习单片机、嵌入式系统等方面的知识；如果你对软件开发感兴趣，可以重点学习编程语言、算法设计、数据库等方面的知识。</p>
+                        
+                        <h3>二、建立知识体系</h3>
+                        <p>物联网工程是一个系统性很强的专业，各个知识点之间相互关联、相互依存。因此，在学习过程中，要注重建立完整的知识体系，将各个知识点有机地结合起来。</p>
+                        <p>可以通过阅读专业书籍、参加课程学习、观看教学视频等方式，全面了解物联网工程专业的知识体系。同时，要注重理论联系实际，通过实践项目来加深对知识点的理解和掌握。</p>
+                        
+                        <h3>三、掌握编程语言</h3>
+                        <p>编程语言是物联网工程专业的基础工具，掌握至少一种编程语言是非常必要的。对于物联网工程专业来说，建议学习以下几种编程语言：</p>
+                        <ul>
+                            <li><strong>Python</strong>：Python是一种简单易学、功能强大的编程语言，在物联网开发中应用广泛。它具有丰富的库和框架，可以用于数据分析、机器学习、Web开发等多个领域。</li>
+                            <li><strong>C/C++</strong>：C/C++是一种高效、灵活的编程语言，在嵌入式系统开发中应用广泛。物联网设备通常需要运行在资源受限的环境中，C/C++的高效性能使其成为嵌入式开发的首选语言。</li>
+                            <li><strong>Java</strong>：Java是一种跨平台的编程语言，在企业级应用开发中应用广泛。在物联网领域，Java可以用于开发后端服务和云平台。</li>
+                        </ul>
+                        
+                        <h3>四、注重实践操作</h3>
+                        <p>物联网工程是一个实践性很强的专业，只有通过实践才能真正掌握所学的知识。建议多参加实验课程、项目实践和竞赛活动，通过实际操作来加深对知识点的理解和掌握。</p>
+                        <p>可以从简单的项目开始，如使用Arduino或ESP32开发板搭建一个简单的物联网系统，然后逐渐过渡到复杂的项目。在实践过程中，要注重积累经验，不断总结和改进。</p>
+                        
+                        <h3>五、关注行业动态</h3>
+                        <p>物联网是一个快速发展的领域，新技术、新应用不断涌现。因此，要关注行业动态，及时了解最新的技术和应用趋势。</p>
+                        <p>可以通过阅读行业报告、参加技术研讨会、关注技术博客等方式，了解物联网领域的最新动态。同时，要积极参与开源社区，与其他开发者交流经验和技术。</p>
+                        
+                        <h3>六、培养团队协作能力</h3>
+                        <p>物联网项目通常需要多个专业的人员协作完成，因此要培养团队协作能力。在团队中，要学会与他人沟通交流，尊重他人的意见和建议，共同完成项目任务。</p>
+                        <p>可以通过参加团队项目、社团活动等方式，锻炼自己的团队协作能力。同时，要学会从团队中学习，借鉴他人的经验和长处。</p>
+                        
+                        <h3>七、制定学习计划</h3>
+                        <p>物联网工程专业的学习内容较多，要制定合理的学习计划，合理安排时间。在制定学习计划时，要根据自己的学习目标和实际情况，合理安排学习内容和学习时间。</p>
+                        <p>同时，要注重学习效率，避免拖延和浪费时间。可以采用番茄工作法等时间管理方法，提高学习效率。</p>
+                        
+                        <h3>八、保持学习热情</h3>
+                        <p>学习是一个长期的过程，需要保持学习热情和动力。物联网工程是一个充满挑战和机遇的领域，只有保持学习热情，才能不断探索和创新。</p>
+                        <p>可以通过设定学习目标、奖励自己等方式，激发学习热情和动力。同时，要学会从学习中获得乐趣，享受学习的过程。</p>
+                        
+                        <h3>总结</h3>
+                        <p>学习物联网工程需要明确学习目标、建立知识体系、掌握编程语言、注重实践操作、关注行业动态、培养团队协作能力、制定学习计划和保持学习热情。希望以上经验和方法能够对大家有所帮助，祝大家在物联网工程专业的学习中取得好成绩！</p>
+                    `
+                }
+            ];
+
+            // 为每个阅读更多按钮添加点击事件
+            readMoreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = parseInt(this.getAttribute('data-id'));
+                    const article = articles.find(a => a.id === articleId);
+                    
+                    if (article) {
+                        // 填充模态框内容
+                        modalTitle.textContent = article.title;
+                        modalAuthor.textContent = article.author;
+                        modalAuthorAvatar.src = article.authorAvatar;
+                        modalAuthorAvatar.alt = article.author;
+                        modalDate.textContent = article.date;
+                        modalCategory.textContent = article.category;
+                        modalCategory.className = `${article.categoryColor} text-white text-xs font-medium px-2 py-1 rounded`;
+                        modalContent.innerHTML = article.content;
+                        
+                        // 显示模态框
+                        articleModal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden'; // 防止背景滚动
+                    }
+                });
+            });
+
+            // 关闭模态框
+            function closeModal() {
+                articleModal.style.display = 'none';
+                document.body.style.overflow = ''; // 恢复背景滚动
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            closeModalBtn2.addEventListener('click', closeModal);
+
+            // 点击模态框外部关闭
+            articleModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // 按ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && articleModal.style.display === 'flex') {
+                    closeModal();
+                }
+            });
+        });
+
+        // 搜索和筛选功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('article-search');
+            const filterSelect = document.getElementById('article-filter');
+            const sortSelect = document.getElementById('article-sort');
+            const articlesContainer = document.getElementById('articles-container');
+            const articles = Array.from(articlesContainer.querySelectorAll('article'));
+            
+            // 搜索功能
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                filterAndSortArticles(searchTerm, filterSelect.value, sortSelect.value);
+            });
+            
+            // 筛选功能
+            filterSelect.addEventListener('change', function() {
+                filterAndSortArticles(searchInput.value.toLowerCase().trim(), this.value, sortSelect.value);
+            });
+            
+            // 排序功能
+            sortSelect.addEventListener('change', function() {
+                filterAndSortArticles(searchInput.value.toLowerCase().trim(), filterSelect.value, this.value);
+            });
+            
+            // 筛选和排序文章
+            function filterAndSortArticles(searchTerm, category, sortBy) {
+                // 筛选文章
+                let filteredArticles = articles.filter(article => {
+                    const title = article.querySelector('h3').textContent.toLowerCase();
+                    const articleCategory = article.dataset.category.toLowerCase();
+                    
+                    const titleMatch = title.includes(searchTerm);
+                    const categoryMatch = category === 'all' || articleCategory === category.toLowerCase();
+                    
+                    return titleMatch && categoryMatch;
+                });
+                
+                // 排序文章
+                if (sortBy === 'newest') {
+                    filteredArticles.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+                } else if (sortBy === 'oldest') {
+                    filteredArticles.sort((a, b) => new Date(a.dataset.date) - new Date(b.dataset.date));
+                } else if (sortBy === 'popular') {
+                    // 这里可以根据实际需求添加受欢迎程度的排序逻辑
+                    // 目前只是随机排序作为示例
+                    filteredArticles.sort(() => Math.random() - 0.5);
+                }
+                
+                // 显示筛选和排序后的文章
+                articlesContainer.innerHTML = '';
+                if (filteredArticles.length === 0) {
+                    articlesContainer.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <i class="fa fa-search text-gray-400 text-5xl mb-4"></i>
+                            <p class="text-gray-500 text-lg">没有找到匹配的文章</p>
+                        </div>
+                    `;
+                } else {
+                    filteredArticles.forEach(article => {
+                        articlesContainer.appendChild(article);
+                    });
+                }
+            }
+        });
+
+        // 加载更多文章功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadMoreBtn = document.getElementById('load-more-articles');
+            
+            loadMoreBtn.addEventListener('click', function() {
+                // 模拟加载更多文章
+                this.innerHTML = '<i class="fa fa-spinner fa-spin mr-1"></i> 加载中...';
+                this.disabled = true;
+                
+                // 模拟网络请求延迟
+                setTimeout(() => {
+                    // 恢复按钮状态
+                    this.innerHTML = '加载更多文章 <i class="fa fa-refresh ml-1"></i>';
+                    this.disabled = false;
+                    
+                    // 显示提示
+                    alert('已经加载了所有文章');
+                }, 1500);
+            });
+        });
+    </script>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取留言表单和留言容器
+            const messageForm = document.getElementById('message-form');
+            const messagesContainer = document.getElementById('messages-container');
+
+            // 从本地存储中获取留言
+            const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+
+            // 显示留言
+            function displayMessages() {
+                messagesContainer.innerHTML = '';
+                if (storedMessages.length === 0) {
+                    messagesContainer.innerHTML = `
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fa fa-comment-o text-4xl mb-3"></i>
+                            <p>还没有留言，快来留下你的第一条留言吧！</p>
+                        </div>
+                    `;
+                } else {
+                    storedMessages.forEach(message => {
+                        const messageElement = document.createElement('div');
+                        messageElement.classList.add('border', 'border-gray-300', 'p-4', 'rounded-lg');
+                        messageElement.innerHTML = `
+                            <h4 class="text-lg font-semibold">${message.name}</h4>
+                            <p class="text-sm text-gray-500">${message.email}</p>
+                            <p class="text-sm text-gray-500">主题: ${message.subject}</p>
+                            <p class="mt-2">${message.message}</p>
+                        `;
+                        messagesContainer.appendChild(messageElement);
+                    });
+                }
+            }
+
+            // 提交留言
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                const newMessage = {
+                    name,
+                    email,
+                    subject,
+                    message
+                };
+
+                storedMessages.push(newMessage);
+                localStorage.setItem('messages', JSON.stringify(storedMessages));
+
+                displayMessages();
+
+                // 清空表单
+                messageForm.reset();
+            });
+
+            // 初始显示留言
+            displayMessages();
+        });
+    </script>
+</body>
+
+</html>
+
+    </script>
+</html>
